@@ -65,6 +65,8 @@ var LAppDefine = {
 				SAO_ASUNA_41 : "assets/asuna/41.sao",
 				// SAO_ASUNA_42 : "assets/asuna/42.sao",
 				SAO_ASUNA_43 : "assets/asuna/43.sao",
+				// SAO_ASUNA_44 : "assets/asuna/44.sao",
+				SAO_ASUNA_45 : "assets/asuna/45.sao",
 			// ALO
 				ALO_ASUNA_01 : "assets/asuna/01.alo",
 				ALO_ASUNA_02 : "assets/asuna/02.alo",
@@ -109,6 +111,8 @@ var LAppDefine = {
 				ALO_ASUNA_41 : "assets/asuna/41.alo",
 				// ALO_ASUNA_42 : "assets/asuna/42.alo",
 				ALO_ASUNA_43 : "assets/asuna/43.alo",
+				// ALO_ASUNA_44 : "assets/asuna/44.alo",
+				ALO_ASUNA_45 : "assets/asuna/45.alo",
 		// LIKO
 			LIKO_01 : "assets/liko/01.json",
 			LIKO_02 : "assets/liko/02.json",
@@ -127,6 +131,7 @@ var LAppDefine = {
 			LIKO_15 : "assets/liko/15.json",
 			LIKO_16 : "assets/liko/16.json",
 			LIKO_17 : "assets/liko/17.json",
+			LIKO_18 : "assets/liko/18.json",
 			LIKO_SP : "assets/liko/sp.json",
 			LIKO_SP1 : "assets/liko/sp1.json",
 			LIKO_SP2 : "assets/liko/sp2.json",

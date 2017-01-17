@@ -15,7 +15,7 @@ LAppLive2DManager.prototype.changeModel = function(gl){
 	if(this.reloadFlg){
 		this.reloadFlg = false;
 
-		var no = parseInt(this.count % 39);
+		var no = parseInt(this.count % 40);
 		var thisRef = this;
 
 		switch(no){
@@ -252,6 +252,12 @@ LAppLive2DManager.prototype.changeModel = function(gl){
 				this.releaseModel(0,gl);
 				this.createModel();
 				this.models[0].load(gl,LAppDefine.ALO_ASUNA_43);
+				break;
+			case 39:
+				this.releaseModel(1,gl);
+				this.releaseModel(0,gl);
+				this.createModel();
+				this.models[0].load(gl,LAppDefine.ALO_ASUNA_45);
 				break;
 		}
 	}
