@@ -22,8 +22,8 @@ function L2DBaseModel()
     this.updating        = false;
     this.alpha           = 1;
     this.accAlpha        = 0;
-    this.lipSync         = false; // リップシンクが有効かどうか
-    this.lipSyncValue    = 0;     // 基本は0～1
+    this.lipSync         = false; 
+    this.lipSyncValue    = 0;     
     this.accelX          = 0;
     this.accelY          = 0;
     this.accelZ          = 0;
@@ -879,7 +879,7 @@ function L2DMotionManager()
     this.super = MotionQueueManager.prototype;
 }
 
-// MotionQueueManagerクラスを継承
+
 L2DMotionManager.prototype = new MotionQueueManager();
 
 //============================================================

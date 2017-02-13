@@ -1,6 +1,6 @@
 var thisRef = this;
 
-// JavaScriptで発生したエラーを取得
+
 window.onerror = function(msg, url, line, col, error) {
     var errmsg = "file:" + url + "<br>line:" + line + " " + msg;
     l2dError(errmsg);
@@ -17,33 +17,33 @@ function sampleApp1()
     this.gl = null;
     this.canvas = null;
     
-    this.dragMgr = null; /*new L2DTargetPoint();*/ // ドラッグによるアニメーションの管理
+    this.dragMgr = null; /*new L2DTargetPoint();*/ 
     this.viewMatrix = null; /*new L2DViewMatrix();*/
     this.projMatrix = null; /*new L2DMatrix44()*/
     this.deviceToScreen = null; /*new L2DMatrix44();*/
     
-    this.drag = false; // ドラッグ中かどうか
-    this.oldLen = 0;    // 二本指タップした時の二点間の距離
+    this.drag = false; 
+    this.oldLen = 0;    
     
     this.lastMouseX = 0;
     this.lastMouseY = 0;
     
     this.isModelShown = false;
     
-    // モデル描画用canvasの初期化
+    
     initL2dCanvas("glcanvas");
     
-    // モデル用マトリクスの初期化と描画の開始
+    
     init();
 }
 
 
 function initL2dCanvas(canvasId)
 {
-    // canvasオブジェクトを取得
+    
     this.canvas = document.getElementById(canvasId);
     
-    // イベントの登録
+    
     if(this.canvas.addEventListener) {
         this.canvas.addEventListener("mousewheel", mouseEvent, false);
         this.canvas.addEventListener("click", mouseEvent, false);
@@ -55,7 +55,7 @@ function initL2dCanvas(canvasId)
         this.canvas.addEventListener("mouseout", mouseEvent, false);
         this.canvas.addEventListener("contextmenu", mouseEvent, false);
         
-        // タッチイベントに対応
+        
         this.canvas.addEventListener("touchstart", touchEvent, false);
         this.canvas.addEventListener("touchend", touchEvent, false);
         this.canvas.addEventListener("touchmove", touchEvent, false);
@@ -71,13 +71,13 @@ function initL2dCanvas(canvasId)
 
 function init()
 {    
-    // 3Dバッファの初期化
+    
     var width = this.canvas.width;
     var height = this.canvas.height;
     
     this.dragMgr = new L2DTargetPoint();
 
-    // ビュー行列
+    
     var ratio = height / width;
     var left = LAppDefine.VIEW_LOGICAL_LEFT;
     var right = LAppDefine.VIEW_LOGICAL_RIGHT;
@@ -86,10 +86,10 @@ function init()
 
     this.viewMatrix = new L2DViewMatrix();
 
-    // デバイスに対応する画面の範囲。 Xの左端, Xの右端, Yの下端, Yの上端
+    
     this.viewMatrix.setScreenRect(left, right, bottom, top);
     
-    // デバイスに対応する画面の範囲。 Xの左端, Xの右端, Yの下端, Yの上端
+    
     this.viewMatrix.setMaxScreenRect(LAppDefine.VIEW_LOGICAL_MAX_LEFT,
                                      LAppDefine.VIEW_LOGICAL_MAX_RIGHT,
                                      LAppDefine.VIEW_LOGICAL_MAX_BOTTOM,
@@ -101,22 +101,22 @@ function init()
     this.projMatrix = new L2DMatrix44();
     this.projMatrix.multScale(1, (width / height));
 
-    // マウス用スクリーン変換行列
+    
     this.deviceToScreen = new L2DMatrix44();
     this.deviceToScreen.multTranslate(-width / 2.0, -height / 2.0);
     this.deviceToScreen.multScale(2 / width, -2 / width);
     
     
-    // WebGLのコンテキストを取得する
+    
     this.gl = getWebGLContext();
     if (!this.gl) {
         l2dError("Failed to create WebGL context.");
         return;
     }
-    // OpenGLのコンテキストをセット
+    
     Live2D.setGL(this.gl);
 
-    // 描画エリアを白でクリア
+    
     this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
     changeModel();
@@ -129,7 +129,7 @@ function startDraw() {
     if(!this.isDrawStart) {
         this.isDrawStart = true;
         (function tick() {
-                draw(); // 1回分描画
+                draw(); 
 
                 var requestAnimationFrame = 
                     window.requestAnimationFrame || 
@@ -137,7 +137,7 @@ function startDraw() {
                     window.webkitRequestAnimationFrame || 
                     window.msRequestAnimationFrame;
 
-                // 一定時間後に自身を呼び出す
+                
                 requestAnimationFrame(tick ,this.canvas);   
         })();
     }
@@ -151,10 +151,10 @@ function draw()
     MatrixStack.reset();
     MatrixStack.loadIdentity();
     
-    this.dragMgr.update(); // ドラッグ用パラメータの更新
+    this.dragMgr.update(); 
     this.live2DMgr.setDrag(this.dragMgr.getX(), this.dragMgr.getY());
     
-    // Canvasをクリアする
+    
     this.gl.clear(this.gl.COLOR_BUFFER_BIT);
     
     MatrixStack.multMatrix(projMatrix.getArray());
@@ -200,11 +200,9 @@ function changeModel()
     this.live2DMgr.changeModel(this.gl);
 }
 
-/* ********** マウスイベント ********** */
 
-/*
- * マウスホイールによる拡大縮小
- */
+
+
 function modelScaling(scale)
 {   
     var isMaxScale = thisRef.viewMatrix.isMaxScale();
@@ -212,7 +210,7 @@ function modelScaling(scale)
     
     thisRef.viewMatrix.adjustScale(0, 0, scale);
 
-    // 画面が最大になったときのイベント
+    
     if (!isMaxScale)
     {
         if (thisRef.viewMatrix.isMaxScale())
@@ -220,7 +218,7 @@ function modelScaling(scale)
             thisRef.live2DMgr.maxScaleEvent();
         }
     }
-    // 画面が最小になったときのイベント
+    
     if (!isMinScale)
     {
         if (thisRef.viewMatrix.isMinScale())
@@ -231,10 +229,7 @@ function modelScaling(scale)
 }
 
 
-/*
- * クリックされた方向を向く
- * タップされた場所に応じてモーションを再生
- */
+
 function modelTurnHead(event)
 {
     thisRef.drag = true;
@@ -252,16 +247,14 @@ function modelTurnHead(event)
     thisRef.lastMouseX = sx;
     thisRef.lastMouseY = sy;
 
-    thisRef.dragMgr.setPoint(vx, vy); // その方向を向く
+    thisRef.dragMgr.setPoint(vx, vy); 
     
-    // タップした場所に応じてモーションを再生
+    
     thisRef.live2DMgr.tapEvent(vx, vy);
 }
 
 
-/*
- * マウスを動かした時のイベント
- */
+
 function followPointer(event)
 {    
     var rect = event.target.getBoundingClientRect();
@@ -279,14 +272,12 @@ function followPointer(event)
         thisRef.lastMouseX = sx;
         thisRef.lastMouseY = sy;
 
-        thisRef.dragMgr.setPoint(vx, vy); // その方向を向く
+        thisRef.dragMgr.setPoint(vx, vy); 
     }
 }
 
 
-/*
- * 正面を向く
- */
+
 function lookFront()
 {   
     if (thisRef.drag)
@@ -310,13 +301,13 @@ function mouseEvent(e)
             return;
         }
         
-        if (e.wheelDelta > 0) modelScaling(1.1); // 上方向スクロール 拡大
-        else modelScaling(0.9); // 下方向スクロール 縮小
+        if (e.wheelDelta > 0) modelScaling(1.1); 
+        else modelScaling(0.9); 
 
         
     } else if (e.type == "mousedown") {
 
-        // 右クリック以外なら処理を抜ける
+        
         if("button" in e && e.button != 0) return;
         
         modelTurnHead(e);
@@ -327,7 +318,7 @@ function mouseEvent(e)
         
     } else if (e.type == "mouseup") {
         
-        // 右クリック以外なら処理を抜ける
+        
         if("button" in e && e.button != 0) return;
         
         lookFront();
@@ -362,8 +353,8 @@ function touchEvent(e)
             var touch2 = e.touches[1];
             
             var len = Math.pow(touch1.pageX - touch2.pageX, 2) + Math.pow(touch1.pageY - touch2.pageY, 2);
-            if (thisRef.oldLen - len < 0) modelScaling(1.025); // 上方向スクロール 拡大
-            else modelScaling(0.975); // 下方向スクロール 縮小
+            if (thisRef.oldLen - len < 0) modelScaling(1.025); 
+            else modelScaling(0.975); 
             
             thisRef.oldLen = len;
         }
@@ -374,19 +365,19 @@ function touchEvent(e)
 }
 
 
-/* ********** マトリックス操作 ********** */
+
 
 function transformViewX(deviceX)
 {
-    var screenX = this.deviceToScreen.transformX(deviceX); // 論理座標変換した座標を取得。
-    return viewMatrix.invertTransformX(screenX); // 拡大、縮小、移動後の値。
+    var screenX = this.deviceToScreen.transformX(deviceX); 
+    return viewMatrix.invertTransformX(screenX); 
 }
 
 
 function transformViewY(deviceY)
 {
-    var screenY = this.deviceToScreen.transformY(deviceY); // 論理座標変換した座標を取得。
-    return viewMatrix.invertTransformY(screenY); // 拡大、縮小、移動後の値。
+    var screenY = this.deviceToScreen.transformY(deviceY); 
+    return viewMatrix.invertTransformY(screenY); 
 }
 
 
@@ -402,9 +393,7 @@ function transformScreenY(deviceY)
 }
 
 
-/*
-* WebGLのコンテキストを取得する
-*/
+
 function getWebGLContext()
 {
     var NAMES = [ "webgl" , "experimental-webgl" , "webkit-3d" , "moz-webgl"];
@@ -420,9 +409,7 @@ function getWebGLContext()
 };
 
 
-/*
-* 画面ログを出力
-*/
+
 function l2dLog(msg) {
     if(!LAppDefine.DEBUG_LOG) return;
     
@@ -433,9 +420,7 @@ function l2dLog(msg) {
 }
 
 
-/*
-* 画面エラーを出力
-*/
+
 function l2dError(msg)
 {
     if(!LAppDefine.DEBUG_LOG) return;

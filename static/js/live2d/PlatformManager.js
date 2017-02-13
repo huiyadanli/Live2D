@@ -80,14 +80,14 @@ PlatformManager.prototype.loadTexture     = function(model/*ALive2DModel*/, no/*
         // create texture
         var canvas = document.getElementById("glcanvas");
         var gl = getWebGLContext(canvas, {premultipliedAlpha : true});
-        var texture = gl.createTexture();	 // テクスチャオブジェクトを作成する
+        var texture = gl.createTexture();	 
         if (!texture){ console.error("Failed to generate gl texture name."); return -1; }
 
         if(model.isPremultipliedAlpha() == false){
             // 乗算済アルファテクスチャ以外の場合
             gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
         }
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);	// imageを上下反転
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);	
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, 
@@ -97,8 +97,8 @@ PlatformManager.prototype.loadTexture     = function(model/*ALive2DModel*/, no/*
         gl.generateMipmap(gl.TEXTURE_2D);
 
 
-        // 画像からWebGLテクスチャ化を生成し、モデルに登録
-        model.setTexture(no, texture);// モデルにテクスチャをセット
+        
+        model.setTexture(no, texture);
         
         // テクスチャオブジェクトを解放
         texture = null;
@@ -114,14 +114,14 @@ PlatformManager.prototype.loadTexture     = function(model/*ALive2DModel*/, no/*
 
 //============================================================
 //    PlatformManager # parseFromBytes(buf)
-//    ArrayBuffer から JSON に変換する
+
 //============================================================
 PlatformManager.prototype.jsonParseFromBytes = function(buf){
     
     var jsonStr;
     
-    // BOMの有無に応じて処理を分ける
-    // UTF-8のBOMは0xEF 0xBB 0xBF（10進数：239 187 191）
+    
+    
     var bomCode = new Uint8Array(buf, 0, 3);
     if (bomCode[0] == 239 && bomCode[1] == 187 && bomCode[2] == 191) {
         jsonStr = String.fromCharCode.apply(null, new Uint8Array(buf, 3));

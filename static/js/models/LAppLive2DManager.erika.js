@@ -23,7 +23,7 @@ LAppLive2DManager.prototype.changeModel = function(gl){
 				this.releaseModel(1,gl);
 				this.releaseModel(0,gl);
 				this.createModel();
-				this.models[0].load(gl,LAppDefine.ERIKA_1);
+				this.models[0].load(gl,LAppDefine.ERIKA_01);
 				break;
 		}
 	}

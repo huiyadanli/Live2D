@@ -8,31 +8,27 @@
 
 function MatrixStack() {}
 
-// 行列スタック。4x4行列を基本とするので、16ごとの区切りの配列。
+
 MatrixStack.matrixStack = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 
-// 現在のスタックの深さ。初期は0でpushするごとに+1。
+
 MatrixStack.depth = 0;
 
-// 現在の行列
+
 MatrixStack.currentMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 
-// 計算用
+
 MatrixStack.tmp = new Array(16);
 
 
-/*
- * スタックをリセット
- */
+
 MatrixStack.reset = function()
 {
     this.depth = 0;
 }
 
 
-/*
- * 単位行列にする
- */
+
 MatrixStack.loadIdentity = function()
 {
     for (var i = 0; i < 16; i++)
@@ -42,9 +38,7 @@ MatrixStack.loadIdentity = function()
 }
 
 
-/*
- * 現在の行列を保存
- */
+
 MatrixStack.push = function()
 {    
     var offset = this.depth * 16;
@@ -64,9 +58,7 @@ MatrixStack.push = function()
 }
 
 
-/*
- * 一つ前の行列へ
- */
+
 MatrixStack.pop = function()
 {
     this.depth--;
@@ -84,18 +76,14 @@ MatrixStack.pop = function()
 }
 
 
-/*
- * 現在の行列を取得
- */
+
 MatrixStack.getMatrix = function()
 {
     return this.currentMatrix;
 }
 
 
-/*
- * 行列を掛け合わせる
- */
+
 MatrixStack.multMatrix = function(matNew)
 {
     var i, j, k;

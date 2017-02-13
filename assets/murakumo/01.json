@@ -1,0 +1,32 @@
+{
+	"model":"01/model.moc",
+	"physics":"01/physics.json",
+	"textures":[
+		"01/textures/0.png"
+	],
+	"hit_areas":[
+		{"name":"head","id":"D_REF.HEAD"},
+		{"name":"body","id":"D_REF.BODY"},
+		{"name":"ear_l","id":"D_REF.EAR_L"},
+		{"name":"ear_r","id":"D_REF.EAR_R"},
+		{"name":"bust","id":"D_REF.BUST"}
+	],
+	"motions":{
+		"tap_bust":[
+			{"file":"common/motions/murakumo_tap_bust_01.mtn"},
+			{"file":"common/motions/murakumo_tap_bust_02.mtn"}
+		],
+		"idle":[
+			{"file":"common/motions/murakumo_idle_01.mtn"},
+			{"file":"common/motions/murakumo_idle_02.mtn"},
+			{"file":"common/motions/murakumo_idle_03.mtn"}
+		],
+		"tap_ear":[
+			{"file":"common/motions/murakumo_tap_ear_01.mtn"}
+		],
+		"tap":[
+			{"file":"common/motions/murakumo_m_01.mtn"},
+			{"file":"common/motions/murakumo_m_02.mtn"}
+		]
+	}
+}
