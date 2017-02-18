@@ -1,6 +1,6 @@
 {
 	"model":"22/model.moc",
-	"physics":"22/physics.json"
+	"physics":"22/physics.json",
 	"textures":[
 		"common/textures/0b.png",
 		"common/textures/1b.png",
