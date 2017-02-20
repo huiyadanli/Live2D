@@ -28,7 +28,7 @@
 
 /* models.css */
 .asuna{
-	top:-12em;
+	top:-18em;
 	left:5%;
 }
 
@@ -93,10 +93,10 @@ html > *{
 }
 
 #info{
-	font-size:2.59em;
+	font-size:2.56em;
 }
 #accepted{
-	font-size:1.39em;
+	font-size:1.35em;
 }
 
 #glcanvas{
